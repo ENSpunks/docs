@@ -30,8 +30,16 @@ export const mdxPagePropsSchema = z
              */
             contributors: z
                 .array(
-                    // Validate using github username regex (source: https://github.com/shinnn/github-username-regex/blob/master/index.js)
-                    z.string().regex(/^[\da-z](?:[\da-z]|-(?=[\da-z])){0,38}$/i)
+                    z
+                        .string()
+                        // Validate using github username regex (source: https://github.com/shinnn/github-username-regex/blob/master/index.js)
+                        .regex(/^[\da-z](?:[\da-z]|-(?=[\da-z])){0,38}$/i)
+                        .or(
+                            z
+                                .string()
+                                // Validate using ENS domain regex
+                                .regex(/^([\da-z]+(-[\da-z]+)*\.)+[a-z]{2,}$/i)
+                        )
                 )
                 .optional(),
             /**

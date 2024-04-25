@@ -13,6 +13,7 @@ import { Footer } from './footer/PageFooter';
 import { Header } from './header/Header';
 import { RouteCheck } from './RouteCheck';
 import { Sidebar } from './sidebar/Sidebar';
+import { getLinkHref } from '@/utils/contributorHelper';
 
 export const Layout: FC<{
     children: ReactNode;
@@ -36,7 +37,7 @@ export const Layout: FC<{
         author: mdxProperties.meta.contributors?.map((author) => ({
             '@type': 'Person',
             name: author,
-            url: 'https://github.com/' + author,
+            url: getLinkHref(author),
         })),
     };
 

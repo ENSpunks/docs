@@ -5,6 +5,7 @@ import { NextRequest } from 'next/server';
 import { readFile } from 'node:fs/promises';
 
 import { navigation } from '#/config/navigation';
+import { getProfilePicture } from '@/utils/contributorHelper';
 
 // Route segment config
 // export const runtime = 'nodejs';
@@ -297,7 +298,7 @@ export async function GET(request: NextRequest) {
                                 }}
                             >
                                 <img
-                                    src={'https://github.com/' + key + '.png'}
+                                    src={getProfilePicture(key)}
                                     alt=""
                                     style={{
                                         width: '100%',
