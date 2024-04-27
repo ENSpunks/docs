@@ -4,8 +4,8 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { readFile } from 'node:fs/promises';
 
-import { navigation } from '#/config/navigation';
 import { getProfilePicture } from '@/utils/contributorHelper';
+import { navigation } from '#/config/navigation';
 
 // Route segment config
 // export const runtime = 'nodejs';

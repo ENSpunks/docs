@@ -5,6 +5,7 @@ import { Article, WithContext } from 'schema-dts';
 import { Prose } from '@/components/mdx/Prose';
 import { SectionProvider } from '@/components/SectionProvider';
 import { MdxPageProps } from '@/lib/mdxPageProps';
+import { getLinkHref } from '@/utils/contributorHelper';
 import { Breadcrumbs } from '#/content/prose/breadcrumbs/Breadcrumbs';
 
 import { PageDetails } from './details/PageDetails';
@@ -13,7 +14,6 @@ import { Footer } from './footer/PageFooter';
 import { Header } from './header/Header';
 import { RouteCheck } from './RouteCheck';
 import { Sidebar } from './sidebar/Sidebar';
-import { getLinkHref } from '@/utils/contributorHelper';
 
 export const Layout: FC<{
     children: ReactNode;
@@ -69,7 +69,7 @@ export const Layout: FC<{
                                     style={{ left: 'calc(50vw + 26rem)' }}
                                 >
                                     <div className="m-4 p-4">
-                                        <div className="text-ens-light-text-secondary dark:text-ens-dark-text-secondary text-sm">
+                                        <div className="text-sm text-ens-light-text-secondary dark:text-ens-dark-text-secondary">
                                             On this page
                                         </div>
                                         <ul className="text-sm">
