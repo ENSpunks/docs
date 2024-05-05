@@ -4,7 +4,7 @@ import { ImageResponse } from 'next/og';
 import { NextRequest } from 'next/server';
 import { readFile } from 'node:fs/promises';
 
-import { getProfilePicture } from '@/utils/contributorHelper';
+import { getUsernameType } from '@/utils/contributorHelper';
 import { navigation } from '#/config/navigation';
 
 // Route segment config
@@ -102,12 +102,24 @@ export async function GET(request: NextRequest) {
     const [avatars, moreAvatars] = (() => {
         if (!page.pageProperties.meta?.contributors) return [[], 0];
 
-        const v = [...page.pageProperties.meta.contributors].reverse();
+        let hasEthereum = false;
+
+        const v = [...page.pageProperties.meta.contributors]
+            .reverse()
+            .filter((c) => {
+                const type = getUsernameType(c);
+
+                if (type === 'github') return true;
+
+                if (type === 'ens') hasEthereum = true;
+
+                return false;
+            });
 
         const s1 = v.slice(0, 5).reverse();
 
         // grab first 5 contributors
-        return [s1, v.length - s1.length];
+        return [s1, hasEthereum || v.length - s1.length];
     })();
 
     return new ImageResponse(
@@ -298,7 +310,11 @@ export async function GET(request: NextRequest) {
                                 }}
                             >
                                 <img
-                                    src={getProfilePicture(key)}
+                                    src={
+                                        'https://github.com/' +
+                                        key +
+                                        '.png?size=42'
+                                    }
                                     alt=""
                                     style={{
                                         width: '100%',

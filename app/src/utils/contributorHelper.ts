@@ -1,4 +1,6 @@
-const getType = (username: string): 'ens' | 'github' | 'unknown' => {
+export const getUsernameType = (
+    username: string
+): 'ens' | 'github' | 'unknown' => {
     console.log(username);
 
     const github = /^[\da-z](?:[\da-z]|-(?=[\da-z])){0,38}$/i;
@@ -16,7 +18,7 @@ const getType = (username: string): 'ens' | 'github' | 'unknown' => {
 };
 
 export const getProfilePicture = (username: string) => {
-    const type = getType(username);
+    const type = getUsernameType(username);
 
     if (type === 'ens') {
         return `https://enstate.rs/i/${username}`;
@@ -28,7 +30,7 @@ export const getProfilePicture = (username: string) => {
 };
 
 export const getLinkHref = (username: string) => {
-    const type = getType(username);
+    const type = getUsernameType(username);
 
     if (type === 'ens') {
         // Contenthash support soon™
